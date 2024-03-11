@@ -24,7 +24,7 @@ jobs:
     - name: Copy DLLs to a folder
       run: |
         New-Item -ItemType Directory -Force -Path ${{ github.workspace }}\dlls
-        Copy-Item dotnetProject1\dotnetproject1\bin\Release\net6.0\*.dll ${{ github.workspace }}\dlls\
+        Copy-Item dotnetProject1\dotnetProject1\dotnetproject1\bin\Release\net6.0\*.dll ${{ github.workspace }}\dlls\
     
     # Checkout dotnetProject2
     - name: Checkout dotnetProject2
