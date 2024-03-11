@@ -17,14 +17,14 @@ jobs:
     # Build dotnetProject1
     - name: Build dotnetProject1
       run: |
-        cd dotnetProject1/dotnetproject1
+        cd dotnetProject1\dotnetproject1
         dotnet build --configuration Release
     
     # Optionally, copy the DLLs to a specific folder. Adjust the source and destination paths as needed.
     - name: Copy DLLs to a folder
       run: |
-        mkdir -p ${{ github.workspace }}/dlls
-        cp dotnetProject1/dotnetproject1/bin/Release/netcoreapp3.1/*.dll ${{ github.workspace }}/dlls/
+        New-Item -ItemType Directory -Force -Path ${{ github.workspace }}\dlls
+        Copy-Item dotnetProject1\dotnetproject1\bin\Release\net6.0\*.dll ${{ github.workspace }}\dlls\
     
     # Checkout dotnetProject2
     - name: Checkout dotnetProject2
@@ -34,11 +34,9 @@ jobs:
         path: 'dotnetProject2'
     
     # Build dotnetProject2, assuming it needs the DLLs from dotnetProject1
-    # Adjust the .NET Core version and paths according to your project's setup.
     - name: Build dotnetProject2
       run: |
-        # If dotnetProject2 requires the DLLs from dotnetProject1, make sure they are accessible as needed
-        # For example, copy them to the expected location by dotnetProject2 or reference them appropriately
-        cd dotnetProject2/dotnetProject2
+        cd dotnetProject2\dotnetProject2
+        # If specific DLLs from dotnetProject1 are needed, ensure they're correctly referenced or copied to expected locations
         dotnet restore
         dotnet build --configuration Release
